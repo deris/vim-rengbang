@@ -40,7 +40,7 @@ function! s:rengbang(pattern, options)
   let s:start = get(a:options, 0, get(g:, 'rengbang_default_start', 0))
   let s:step  = get(a:options, 1, get(g:, 'rengbang_default_step', 1))
 
-  let pattern = empty(a:pattern) ? get(g, 'rengbang_default_pattern', '\(\d\+\)') : a:pattern
+  let pattern = empty(a:pattern) ? get(g:, 'rengbang_default_pattern', '\(\d\+\)') : a:pattern
 
   let s:counter = 0
 
