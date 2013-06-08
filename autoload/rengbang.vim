@@ -48,11 +48,8 @@ function! s:rengbang(pattern, options)
 endfunction
 
 function! s:matched(match)
-  if g:rengbang_use_first_number
-    let s:first_number = a:match
-  else
-    let s:first_number = 0
-  endif
+  let s:first_number = g:rengbang_use_first_number != 0 ?
+    \ a:match : 0
 
   return s:first_number + s:start + s:step()
 endfunction
