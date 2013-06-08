@@ -29,6 +29,10 @@ set cpo&vim
 function! rengbang#rengbang(pattern, ...)
   call s:rengbang(a:pattern, a:000)
 endfunction
+
+function! rengbang#rengbang_use_prev(...)
+  call s:rengbang_use_prev(a:000)
+endfunction
 "}}}
 
 " Private {{{1
@@ -42,9 +46,21 @@ function! s:rengbang(pattern, options)
 
   let pattern = get(a:, 'pattern', g:rengbang_default_pattern)
 
+  let s:prev_pattern = pattern
+  let s:prev_start = s:start
+  let s:prev_step = s:step
+
   let s:counter = 0
 
   silent execute "'<,'>s/".pattern.'/\=s:matched(submatch(1))/g'
+endfunction
+
+function! s:rengbang_use_prev(options)
+  let pasttern = get(s:, 'prev_pattern', g:rengbang_default_pattern)
+  let start = get(a:options, 0, get(s:, 'prev_start', g:rengbang_default_start))
+  let step  = get(a:options, 1, get(s:, 'prev_step', g:rengbang_default_step))
+
+  call s:rengbang(s:prev_pattern, [start, step])
 endfunction
 
 function! s:matched(match)
