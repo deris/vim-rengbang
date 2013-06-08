@@ -61,6 +61,10 @@ function! s:rengbang(options, fline, lline)
 endfunction
 
 function! s:rengbang_use_prev(options, fline, lline)
+  if len(a:options) > 3
+    return
+  endif
+
   let pattern = get(s:, 'prev_pattern', g:rengbang_default_pattern)
   let start = get(a:options, 0, get(s:, 'prev_start', g:rengbang_default_start))
   let step  = get(a:options, 1, get(s:, 'prev_step', g:rengbang_default_step))
