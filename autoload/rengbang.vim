@@ -51,6 +51,7 @@ function! s:rengbang(options)
 
   let s:counter = 0
 
+  let pattern = s:normalize_pattern(pattern)
   silent execute "'<,'>s/".pattern.'/\=s:matched(submatch(1))/g'
 endfunction
 
@@ -73,6 +74,13 @@ function! s:step()
   let tmp = s:counter
   let s:counter += s:step
   return tmp
+endfunction
+
+function! s:normalize_pattern(pattern)
+  let pattern = a:pattern
+  let pattern = substitute(pattern, '\%(\\zs\)\@<!\\(', '\\zs\\(', 'g')
+  let pattern = substitute(pattern, '\\)\%(\\ze\)\@!', '\\)\\ze', 'g')
+  return pattern
 endfunction
 "}}}
 
