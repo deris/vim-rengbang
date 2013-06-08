@@ -26,8 +26,8 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 " Public API {{{1
-function! rengbang#rengbang(pattern, ...)
-  call s:rengbang(a:pattern, a:000)
+function! rengbang#rengbang(...)
+  call s:rengbang(a:000)
 endfunction
 
 function! rengbang#rengbang_use_prev(...)
@@ -36,15 +36,14 @@ endfunction
 "}}}
 
 " Private {{{1
-function! s:rengbang(pattern, options)
-  if len(a:options) > 2
+function! s:rengbang(options)
+  if len(a:options) > 3
     return
   endif
 
-  let s:start = get(a:options, 0, g:rengbang_default_start)
-  let s:step  = get(a:options, 1, g:rengbang_default_step)
-
-  let pattern = get(a:, 'pattern', g:rengbang_default_pattern)
+  let pattern = get(a:options, 0, g:rengbang_default_pattern)
+  let s:start = get(a:options, 1, g:rengbang_default_start)
+  let s:step  = get(a:options, 2, g:rengbang_default_step)
 
   let s:prev_pattern = pattern
   let s:prev_start = s:start
@@ -60,7 +59,7 @@ function! s:rengbang_use_prev(options)
   let start = get(a:options, 0, get(s:, 'prev_start', g:rengbang_default_start))
   let step  = get(a:options, 1, get(s:, 'prev_step', g:rengbang_default_step))
 
-  call s:rengbang(s:prev_pattern, [start, step])
+  call s:rengbang([s:prev_pattern, start, step])
 endfunction
 
 function! s:matched(match)
