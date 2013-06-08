@@ -52,6 +52,9 @@ function! s:rengbang(options, fline, lline)
   let s:prev_usefirst = s:usefirst
 
   let s:counter = 0
+  if exists('s:first_number')
+    unlet s:first_number
+  endif
 
   let pattern = s:normalize_pattern(pattern)
   silent execute printf('%s,%ssubstitute/%s/\=s:matched(submatch(1))/g', a:fline, a:lline, pattern)
@@ -67,8 +70,10 @@ function! s:rengbang_use_prev(options, fline, lline)
 endfunction
 
 function! s:matched(match)
-  let s:first_number = s:usefirst != 0 ?
-    \ a:match : 0
+  if !exists('s:first_number')
+    let s:first_number = s:usefirst != 0 ?
+      \ a:match : 0
+  endif
 
   return s:first_number + s:start + s:step()
 endfunction
