@@ -26,17 +26,19 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 " Public API {{{1
-
+function! rengbang#rengbang(pattern, ...)
+  call s:rengbang(a:pattern, a:000)
+endfunction
 "}}}
 
 " Private {{{1
-function! s:rengbang(pattern, ...)
-  if a:0 > 2
+function! s:rengbang(pattern, options)
+  if len(a:options) > 2
     return
   endif
 
-  let s:start = get(a:, 1, get(g:, 'rengbang_default_start', 0))
-  let s:step  = get(a:, 2, get(g:, 'rengbang_default_step', 1))
+  let s:start = get(a:options, 0, get(g:, 'rengbang_default_start', 0))
+  let s:step  = get(a:options, 1, get(g:, 'rengbang_default_step', 1))
 
   let pattern = empty(a:pattern) ? get(g, 'rengbang_default_pattern', '\(\d\+\)') : a:pattern
 

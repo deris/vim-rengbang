@@ -34,7 +34,7 @@ set cpo&vim
 
 command! -count -nargs=*
   \	RengBang
-  \	call s:rengbang(<f-args>)
+  \	call rengbang#rengbang(<f-args>)
 
 
 
