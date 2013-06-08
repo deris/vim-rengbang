@@ -32,12 +32,12 @@ set cpo&vim
 
 
 
-command! -count -nargs=*
+command! -range -nargs=*
   \	RengBang
-  \	call rengbang#rengbang(<f-args>)
-command! -count -nargs=*
+  \	<line1>,<line2>call rengbang#rengbang(<f-args>)
+command! -range -nargs=*
   \	RengBangUsePrev
-  \	call rengbang#rengbang_use_prev(<f-args>)
+  \	<line1>,<line2>call rengbang#rengbang_use_prev(<f-args>)
 
 let g:rengbang_default_start    = get(g:, 'rengbang_default_start', 0)
 let g:rengbang_default_step     = get(g:, 'rengbang_default_step', 1)

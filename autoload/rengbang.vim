@@ -26,17 +26,17 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 " Public API {{{1
-function! rengbang#rengbang(...)
-  call s:rengbang(a:000)
+function! rengbang#rengbang(...) range
+  call s:rengbang(a:000, a:firstline, a:lastline)
 endfunction
 
-function! rengbang#rengbang_use_prev(...)
-  call s:rengbang_use_prev(a:000)
+function! rengbang#rengbang_use_prev(...) range
+  call s:rengbang_use_prev(a:000, a:firstline, a:lastline)
 endfunction
 "}}}
 
 " Private {{{1
-function! s:rengbang(options)
+function! s:rengbang(options, fline, lline)
   if len(a:options) > 3
     return
   endif
@@ -52,15 +52,15 @@ function! s:rengbang(options)
   let s:counter = 0
 
   let pattern = s:normalize_pattern(pattern)
-  silent execute "'<,'>s/".pattern.'/\=s:matched(submatch(1))/g'
+  silent execute printf('%s,%ssubstitute/%s/\=s:matched(submatch(1))/g', a:fline, a:lline, pattern)
 endfunction
 
-function! s:rengbang_use_prev(options)
+function! s:rengbang_use_prev(options, fline, lline)
   let pattern = get(s:, 'prev_pattern', g:rengbang_default_pattern)
   let start = get(a:options, 0, get(s:, 'prev_start', g:rengbang_default_start))
   let step  = get(a:options, 1, get(s:, 'prev_step', g:rengbang_default_step))
 
-  call s:rengbang([pattern, start, step])
+  call s:rengbang([pattern, start, step], a:fline, a:lline)
 endfunction
 
 function! s:matched(match)
