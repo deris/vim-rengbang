@@ -37,17 +37,19 @@ endfunction
 
 " Private {{{1
 function! s:rengbang(options, fline, lline)
-  if len(a:options) > 3
+  if len(a:options) > 4
     return
   endif
 
   let pattern = get(a:options, 0, g:rengbang_default_pattern)
   let s:start = get(a:options, 1, g:rengbang_default_start)
   let s:step  = get(a:options, 2, g:rengbang_default_step)
+  let s:usefirst  = get(a:options, 3, g:rengbang_use_first_number)
 
   let s:prev_pattern = pattern
   let s:prev_start = s:start
   let s:prev_step = s:step
+  let s:prev_usefirst = s:usefirst
 
   let s:counter = 0
 
@@ -59,12 +61,13 @@ function! s:rengbang_use_prev(options, fline, lline)
   let pattern = get(s:, 'prev_pattern', g:rengbang_default_pattern)
   let start = get(a:options, 0, get(s:, 'prev_start', g:rengbang_default_start))
   let step  = get(a:options, 1, get(s:, 'prev_step', g:rengbang_default_step))
+  let usefirst = get(a:options, 2, get(s:, 'prev_usefirst', g:rengbang_use_first_number))
 
-  call s:rengbang([pattern, start, step], a:fline, a:lline)
+  call s:rengbang([pattern, start, step, usefirst], a:fline, a:lline)
 endfunction
 
 function! s:matched(match)
-  let s:first_number = g:rengbang_use_first_number != 0 ?
+  let s:first_number = s:usefirst != 0 ?
     \ a:match : 0
 
   return s:first_number + s:start + s:step()
