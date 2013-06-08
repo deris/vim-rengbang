@@ -36,6 +36,11 @@ command! -count -nargs=*
   \	RengBang
   \	call rengbang#rengbang(<f-args>)
 
+let g:rengbang_default_start    = get(g:, 'rengbang_default_start', 0)
+let g:rengbang_default_step     = get(g:, 'rengbang_default_step', 1)
+let g:rengbang_default_pattern  = get(g:, 'rengbang_default_pattern', '\(\d\+\)')
+let g:rengbang_use_first_number = get(g:, 'rengbang_use_first_number', 0)
+
 
 
 let &cpo = s:save_cpo

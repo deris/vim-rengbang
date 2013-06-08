@@ -37,10 +37,10 @@ function! s:rengbang(pattern, options)
     return
   endif
 
-  let s:start = get(a:options, 0, get(g:, 'rengbang_default_start', 0))
-  let s:step  = get(a:options, 1, get(g:, 'rengbang_default_step', 1))
+  let s:start = get(a:options, 0, g:rengbang_default_start)
+  let s:step  = get(a:options, 1, g:rengbang_default_step)
 
-  let pattern = empty(a:pattern) ? get(g:, 'rengbang_default_pattern', '\(\d\+\)') : a:pattern
+  let pattern = empty(a:pattern) ? g:rengbang_default_pattern : a:pattern
 
   let s:counter = 0
 
@@ -48,7 +48,7 @@ function! s:rengbang(pattern, options)
 endfunction
 
 function! s:matched(match)
-  if get(g:, 'rengbang_use_first_number', 0)
+  if g:rengbang_use_first_number
     let s:first_number = a:match
   else
     let s:first_number = 0
