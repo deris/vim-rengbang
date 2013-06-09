@@ -32,7 +32,7 @@ set cpo&vim
 
 
 call operator#user#define('rengbang', 'operator#rengbang#rengbang')
-call operator#user#define('rengbang_use_prev', 'operator#rengbang#rengbang_use_prev')
+call operator#user#define('rengbang-useprev', 'operator#rengbang#rengbang_use_prev')
 
 
 let &cpo = s:save_cpo
