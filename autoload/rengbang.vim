@@ -44,7 +44,7 @@ function! s:rengbang(options, fline, lline)
   let pattern = get(a:options, 0, g:rengbang_default_pattern)
   let s:start = get(a:options, 1, g:rengbang_default_start)
   let s:step  = get(a:options, 2, g:rengbang_default_step)
-  let s:usefirst  = get(a:options, 3, g:rengbang_use_first_number)
+  let s:usefirst  = get(a:options, 3, g:rengbang_default_usefirst)
 
   let s:prev_pattern = pattern
   let s:prev_start = s:start
@@ -68,7 +68,7 @@ function! s:rengbang_use_prev(options, fline, lline)
   let pattern = get(s:, 'prev_pattern', g:rengbang_default_pattern)
   let start = get(a:options, 0, get(s:, 'prev_start', g:rengbang_default_start))
   let step  = get(a:options, 1, get(s:, 'prev_step', g:rengbang_default_step))
-  let usefirst = get(a:options, 2, get(s:, 'prev_usefirst', g:rengbang_use_first_number))
+  let usefirst = get(a:options, 2, get(s:, 'prev_usefirst', g:rengbang_default_usefirst))
 
   call s:rengbang([pattern, start, step, usefirst], a:fline, a:lline)
 endfunction
