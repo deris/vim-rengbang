@@ -30,10 +30,10 @@ Usage
 
 ### Functions
 ```vim
-"You can use function same as commands, all parameter is option.
-"format is like this.
-" rengbang#rengbang([pattern, start, step, use_first])
-" rengbang#rengbang_use_prev([start, step, use_first])
+" You can use function same as commands, all parameter is option.
+" This is function's format.
+"   rengbang#rengbang([pattern, start, step, use_first])
+"   rengbang#rengbang_use_prev([start, step, use_first])
 
 " This is like :'<,'>RengBang \[\(\d\+\)\] 0  1  1
 :'<,'>call rengbang#rengbang('\[\(\d\+\)\]', 0, 1, 1)
@@ -44,8 +44,10 @@ Usage
 
 ### Global variables
 ```vim
-"If you want to customize default settings, like this.
-"Following settings is default value.
+" If you want to customize default settings,
+" you can change following gloval variable.
+
+" Following settings is default value.
 let g:rengbang_default_pattern  = '\(\d\+\)'
 let g:rengbang_default_start    = 0
 let g:rengbang_default_step     = 1
@@ -54,8 +56,11 @@ let g:rengbang_default_usefirst = 0
 
 ### Operators
 ```vim
-" You can use operator like this.
+" You can use following operator.
+
+" This operator like :'<,'>RengBang (use default options).
 map <Leader>sr <Plug>(operator-rengbang)
+" This operator like :'<,'>RengBangUsePrev (use previous options).
 map <Leader>sp <Plug>(operator-rengbang-useprev)
 ```
 
