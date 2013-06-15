@@ -33,6 +33,10 @@ endfunction
 function! rengbang#rengbang_use_prev(...) range
   call s:rengbang_use_prev(a:000, a:firstline, a:lastline)
 endfunction
+
+function! rengbang#config(...)
+  call s:config(a:000)
+endfunction
 "}}}
 
 " Private {{{1
@@ -71,6 +75,17 @@ function! s:rengbang_use_prev(options, fline, lline)
   let usefirst = get(a:options, 2, get(s:, 'prev_usefirst', g:rengbang_default_usefirst))
 
   call s:rengbang([pattern, start, step, usefirst], a:fline, a:lline)
+endfunction
+
+function! s:config(options)
+  if len(a:options) > 4
+    return
+  endif
+
+  let g:rengbang_default_pattern = get(a:options, 0, g:rengbang_default_pattern)
+  let g:rengbang_default_start = get(a:options, 1, g:rengbang_default_start)
+  let g:rengbang_default_step  = get(a:options, 2, g:rengbang_default_step)
+  let g:rengbang_default_usefirst  = get(a:options, 3, g:rengbang_default_usefirst)
 endfunction
 
 function! s:matched(match)
