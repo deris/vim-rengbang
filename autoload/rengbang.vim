@@ -45,7 +45,7 @@ function! s:rengbang(options, fline, lline)
     return
   endif
 
-  let pattern = get(a:options, 0, g:rengbang_default_pattern)
+  let pattern = get(a:options, 0, '') == '' ? g:rengbang_default_pattern : a:options[0]
   let s:start = get(a:options, 1, g:rengbang_default_start)
   let s:step  = get(a:options, 2, g:rengbang_default_step)
   let s:usefirst  = get(a:options, 3, g:rengbang_default_usefirst)
@@ -82,7 +82,7 @@ function! s:config(options)
     return
   endif
 
-  let g:rengbang_default_pattern = get(a:options, 0, g:rengbang_default_pattern)
+  let g:rengbang_default_pattern = get(a:options, 0, '') == '' ? g:rengbang_default_pattern : a:options[0]
   let g:rengbang_default_start = get(a:options, 1, g:rengbang_default_start)
   let g:rengbang_default_step  = get(a:options, 2, g:rengbang_default_step)
   let g:rengbang_default_usefirst  = get(a:options, 3, g:rengbang_default_usefirst)
