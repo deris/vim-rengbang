@@ -1,4 +1,4 @@
-" rengbang - 連番入力補助plugin operator-user
+" rengbang - operator for vim-rengbang
 " Version: 0.0.0
 " Copyright (C) 2013 deris0126
 " License: MIT license  {{{

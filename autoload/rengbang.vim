@@ -1,4 +1,4 @@
-" rengbang - 連番入力補助plugin
+" rengbang - Vim plugin for sequencial numbering
 " Version: 0.0.0
 " Author: manga_osyo, deris0126
 " Copyright (C) 2013 deris0126
