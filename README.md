@@ -62,7 +62,7 @@ let g:rengbang_default_usefirst = 0
 
 ### Operators
 ```vim
-" You can use following operator.
+" You can use following operator if you install [vim-operator-rengbang](http://github.com/deris/vim-operator-rengbang)
 
 " This operator like :'<,'>RengBang (use default options).
 map <Leader>sr <Plug>(operator-rengbang)
