@@ -1,5 +1,6 @@
 " rengbang - 連番入力補助plugin
 " Version: 0.0.0
+" Author: manga_osyo, deris0126
 " Copyright (C) 2013 deris0126
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
