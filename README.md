@@ -14,13 +14,13 @@ Usage
 " Sequential numbering use default settings(ref. global variables).
 :'<,'>RengBang
 " Specify pattern like this. This sample is for array index.
-:'<,'>RengBang \[\(\d\+\)\]
+:'<,'>RengBang \[\zs\(\d\+\)\ze\]
 " Start sequencial numbering from 3.
-:'<,'>RengBang \[\(\d\+\)\] 3
+:'<,'>RengBang \[\zs\(\d\+\)\ze\] 3
 " Start from 3 and 2 step.
-:'<,'>RengBang \[\(\d\+\)\] 0  2
+:'<,'>RengBang \[\zs\(\d\+\)\ze\] 0  2
 " Start position use first detected number.
-:'<,'>RengBang \[\(\d\+\)\] 0  1  1
+:'<,'>RengBang \[\zs\(\d\+\)\ze\] 0  1  1
 
 " You can use previous command options.
 :'<,'>RengBangUsePrev
@@ -35,8 +35,8 @@ Usage
 "   rengbang#rengbang([pattern, start, step, use_first])
 "   rengbang#rengbang_use_prev([start, step, use_first])
 
-" This is like :'<,'>RengBang \[\(\d\+\)\] 0  1  1
-:'<,'>call rengbang#rengbang('\[\(\d\+\)\]', 0, 1, 1)
+" This is like :'<,'>RengBang \[\zs\(\d\+\)\ze\] 0  1  1
+:'<,'>call rengbang#rengbang('\[\zs\(\d\+\)\ze\]', 0, 1, 1)
 " This is like :'<,'>RengBangUsePrev 1 1 0
 :'<,'>call rengbang#rengbang_use_prev(1, 1, 0)
 
@@ -45,7 +45,7 @@ Usage
 "   rengbang#config([pattern, start, step, use_first])
 
 " This is only config settings without sequential numbering.
-:call rengbang#config(''\[\(\d\+\)\]', 0, 1, 1)
+:call rengbang#config('\[\zs\(\d\+\)\ze\]', 0, 1, 1)
 ```
 
 ### Global variables
