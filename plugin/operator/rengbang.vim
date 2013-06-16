@@ -31,8 +31,12 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 
-call operator#user#define('rengbang', 'operator#rengbang#rengbang')
-call operator#user#define('rengbang-useprev', 'operator#rengbang#rengbang_use_prev')
+try
+  call operator#user#define('rengbang', 'operator#rengbang#rengbang')
+  call operator#user#define('rengbang-useprev', 'operator#rengbang#rengbang_use_prev')
+catch
+  " ignore if operator-user is not installed
+endtry
 
 
 let &cpo = s:save_cpo
