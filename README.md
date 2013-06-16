@@ -40,6 +40,12 @@ Usage
 " This is like :'<,'>RengBangUsePrev 1 1 0
 :'<,'>call rengbang#rengbang_use_prev(1, 1, 0)
 
+" You can use this function for customizing default settings.
+" This is functions format
+"   rengbang#config([pattern, start, step, use_first])
+
+" This is only config settings without sequential numbering.
+:call rengbang#config(''\[\(\d\+\)\]', 0, 1, 1)
 ```
 
 ### Global variables
