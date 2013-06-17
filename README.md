@@ -3,6 +3,26 @@ vim-rengbang
 
 This is Vim plugin for sequencial numbering with pattern.
 
+Screenshot
+---
+
+### input 0-99
+
+![screenshot1](http://gifzo.net/GcwkxqqqXQ.gif)
+
+### insert sequencial number to head of line
+
+![screenshot2](http://gifzo.net/dEheiPGLol.gif)
+
+### insert sequencial number before 'foo'
+
+![screenshot3](http://gifzo.net/OSgIW6SLMH.gif)
+
+### revise sequencial number when array index is slanted
+
+![screenshot4](http://gifzo.net/4lfMjTBr1M.gif)
+
+
 Usage
 ---
 
