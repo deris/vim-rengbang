@@ -1,0 +1,171 @@
+*rengbang.txt*	Vim plugin for sequencial numbering with pattern
+
+Version: 0.0.1
+Author: manga_osyo, deris0126
+Copyright (C) 2013 deris0126
+License: MIT license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+}}}
+
+CONTENTS					*rengbang-contents*
+
+Introduction		|rengbang-introduction|
+Interface		|rengbang-interface|
+  Commands		  |rengbang-commands|
+  Functions		  |rengbang-functions|
+  Mappings		  |rengbang-mappings|
+  Variables		  |rengbang-variables|
+Examples		|rengbang-examples|
+Bugs			|rengbang-bugs|
+Changelog		|rengbang-changelog|
+
+
+==============================================================================
+INTRODUCTION					*rengbang-introduction*
+
+
+*rengbang* is Vim plugin for sequencial numbering with pattern.
+
+
+Requirements:
+- Vim 7 or later
+
+Options:
+- |operator-user| (if you want to use operator)
+<https://github.com/kana/vim-operator-user>
+
+Latest version:
+https://github.com/deris/vim-rengbang
+
+
+==============================================================================
+INTERFACE					*rengbang-interface*
+
+------------------------------------------------------------------------------
+COMMANDS                                       *rengbang-commands*
+
+:[range]RengBang [pattern] [start] [step] [usefirst]		*RengBang*
+	You can use this command for sequential numbering.
+	[pattern] is regex pattern for insertint sequential
+	numbering.
+	[start] is start number for sequential numbering.
+	[step] is step number for sequential numbering.
+	[usefirst] is to use first match number for sequential numbering.
+
+
+
+:[range]RengBangUsePrev [start] [step] [usefirst]		*RengBangUsePrev*
+	This command is same as RengBang, this use
+	previous pattern and can set other options.
+
+------------------------------------------------------------------------------
+FUNCTIONS                                       *rengbang-functions*
+
+rengbang#rengbang([pattern], [start], [step], [usefirst]) [range]	*rengbang#rengbang()*
+	This is function version of RengBang.
+
+rengbang#rengbang_use_prev([pattern], [start], [step], [usefirst]) [range]	*rengbang#rengbang_use_prev()*
+	This is function version of RengBangUsePrev.
+
+rengbang#config([pattern], [start], [step], [use_first])	*rengbang#config()*
+	You can use this function for customizing default settings.
+
+------------------------------------------------------------------------------
+VARIABLES                                       *rengbang-variables*
+
+g:rengbang_default_pattern   (default: '\(\d\+\)')
+	default regex pattern for insertint sequential numbering.
+
+g:rengbang_default_start   (default: 0)
+	default start number for sequential numbering.
+
+g:rengbang_default_step   (default: 1)
+	default step number for sequential numbering.
+
+g:rengbang_default_usefirst   (default: 0)
+	default use first number for sequential numbering.
+	If set 0 don't use first number, otherwise set 1 use first number.
+
+------------------------------------------------------------------------------
+MAPPINGS					*rengbang-mappings*
+
+<Plug>(operator-rengbang)			*<Plug>(rengbang-backward)*
+<Plug>(operator-rengbang-useprev)		*<Plug>(rengbang-forward)*
+	These mappings are defined in Normal mode, Visual mode
+	and Operator-pending mode.
+	If you want to use these mappings, you need to install
+	vim-operator-user<https://github.com/kana/vim-operator-user>.
+
+
+==============================================================================
+EXAMPLES					*rengbang-examples*
+
+" Select text linewise and you can use following command
+" for sequential numbering (in Japanese called rengbang).
+
+" Sequential numbering use default settings(ref. global variables).
+:'<,'>RengBang
+" Specify pattern like this. This sample is for array index.
+:'<,'>RengBang \[\zs\(\d\+\)\ze\]
+" Start sequencial numbering from 3.
+:'<,'>RengBang \[\zs\(\d\+\)\ze\] 3
+" Start from 3 and 2 step.
+:'<,'>RengBang \[\zs\(\d\+\)\ze\] 0  2
+" Start position use first detected number.
+:'<,'>RengBang \[\zs\(\d\+\)\ze\] 0  1  1
+
+" You can use previous command options.
+:'<,'>RengBangUsePrev
+" Use previous pattern and set other options.
+:'<,'>RengBangUsePrev 1 1 0
+" You can use function same as commands, all parameter is option.
+" This is function's format.
+"   rengbang#rengbang([pattern, start, step, use_first])
+"   rengbang#rengbang_use_prev([start, step, use_first])
+
+" This is like :'<,'>RengBang \[\zs\(\d\+\)\ze\] 0  1  1
+:'<,'>call rengbang#rengbang('\[\zs\(\d\+\)\ze\]', 0, 1, 1)
+" This is like :'<,'>RengBangUsePrev 1 1 0
+:'<,'>call rengbang#rengbang_use_prev(1, 1, 0)
+
+" You can use this function for customizing default settings.
+" This is functions format
+"   rengbang#config([pattern, start, step, use_first])
+
+" This is only config settings without sequential numbering.
+:call rengbang#config('\[\zs\(\d\+\)\ze\]', 0, 1, 1)
+
+
+==============================================================================
+BUGS						*rengbang-bugs*
+
+- Currently, there is no known issue.
+
+
+==============================================================================
+CHANGELOG					*rengbang-changelog*
+
+0.0.1	2013-06-07
+- First Version.
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:fen:fdl=0:fdm=marker:
+
