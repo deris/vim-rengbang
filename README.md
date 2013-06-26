@@ -90,3 +90,7 @@ map <Leader>sr <Plug>(operator-rengbang)
 map <Leader>sp <Plug>(operator-rengbang-useprev)
 ```
 
+### License
+
+MIT License
+
