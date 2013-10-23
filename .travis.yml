@@ -1,0 +1,10 @@
+language: viml
+rvm:
+  - 2.0.0
+script:
+  - vim --version
+  - cd t/
+  - ../vim-vspec/bin/vspec ../vim-vspec ../vim-operator-user vspec.vim
+install:
+  - git clone https://github.com/kana/vim-vspec.git
+  - git clone https://github.com/kana/vim-operator-user.git
