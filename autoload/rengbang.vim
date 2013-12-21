@@ -35,6 +35,10 @@ function! rengbang#rengbang_use_prev(...) range
   call s:rengbang_use_prev(a:000, a:firstline, a:lastline)
 endfunction
 
+function! rengbang#rengbang_confirm() range
+  call s:rengbang_confirm(a:firstline, a:lastline)
+endfunction
+
 function! rengbang#config(...)
   call s:config(a:000)
 endfunction
@@ -77,6 +81,16 @@ function! s:rengbang_use_prev(options, fline, lline)
   let step  = get(a:options, 1, get(s:, 'prev_step', g:rengbang_default_step))
   let usefirst = get(a:options, 2, get(s:, 'prev_usefirst', g:rengbang_default_usefirst))
   let format = get(a:options, 3, get(s:, 'prev_format', g:rengbang_default_format))
+
+  call s:rengbang([pattern, start, step, usefirst, format], a:fline, a:lline)
+endfunction
+
+function! s:rengbang_confirm(fline, lline)
+  let pattern = input('Pattern: ', g:rengbang_default_pattern)
+  let start = input('Start Number: ', g:rengbang_default_start)
+  let step = input('Step Count: ', g:rengbang_default_step)
+  let usefirst = input('Use First: ', g:rengbang_default_usefirst)
+  let format = input('Format: ', g:rengbang_default_format)
 
   call s:rengbang([pattern, start, step, usefirst, format], a:fline, a:lline)
 endfunction

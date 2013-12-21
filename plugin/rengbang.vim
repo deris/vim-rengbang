@@ -39,6 +39,9 @@ command! -range -nargs=*
 command! -range -nargs=*
   \	RengBangUsePrev
   \	<line1>,<line2>call rengbang#rengbang_use_prev(<f-args>)
+command! -range -nargs=0
+  \	RengBangConfirm
+  \	<line1>,<line2>call rengbang#rengbang_confirm()
 
 let g:rengbang_default_start    = get(g:, 'rengbang_default_start', 0)
 let g:rengbang_default_step     = get(g:, 'rengbang_default_step', 1)
