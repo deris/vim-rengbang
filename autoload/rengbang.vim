@@ -42,7 +42,7 @@ endfunction
 
 " Private {{{1
 function! s:rengbang(options, fline, lline)
-  if len(a:options) > 4
+  if len(a:options) > 5
     return
   endif
 
@@ -50,11 +50,13 @@ function! s:rengbang(options, fline, lline)
   let s:start = get(a:options, 1, g:rengbang_default_start)
   let s:step  = get(a:options, 2, g:rengbang_default_step)
   let s:usefirst  = get(a:options, 3, g:rengbang_default_usefirst)
+  let s:format  = get(a:options, 4, g:rengbang_default_format)
 
   let s:prev_pattern = pattern
   let s:prev_start = s:start
   let s:prev_step = s:step
   let s:prev_usefirst = s:usefirst
+  let s:prev_format = s:format
 
   let s:counter = 0
   if exists('s:first_number')
@@ -66,7 +68,7 @@ function! s:rengbang(options, fline, lline)
 endfunction
 
 function! s:rengbang_use_prev(options, fline, lline)
-  if len(a:options) > 3
+  if len(a:options) > 4
     return
   endif
 
@@ -74,12 +76,13 @@ function! s:rengbang_use_prev(options, fline, lline)
   let start = get(a:options, 0, get(s:, 'prev_start', g:rengbang_default_start))
   let step  = get(a:options, 1, get(s:, 'prev_step', g:rengbang_default_step))
   let usefirst = get(a:options, 2, get(s:, 'prev_usefirst', g:rengbang_default_usefirst))
+  let format = get(a:options, 3, get(s:, 'prev_format', g:rengbang_default_format))
 
-  call s:rengbang([pattern, start, step, usefirst], a:fline, a:lline)
+  call s:rengbang([pattern, start, step, usefirst, format], a:fline, a:lline)
 endfunction
 
 function! s:config(options)
-  if len(a:options) > 4
+  if len(a:options) > 5
     return
   endif
 
@@ -87,6 +90,7 @@ function! s:config(options)
   let g:rengbang_default_start = get(a:options, 1, g:rengbang_default_start)
   let g:rengbang_default_step  = get(a:options, 2, g:rengbang_default_step)
   let g:rengbang_default_usefirst  = get(a:options, 3, g:rengbang_default_usefirst)
+  let g:rengbang_default_format  = get(a:options, 4, g:rengbang_default_format)
 endfunction
 
 function! s:matched(match)
@@ -95,7 +99,7 @@ function! s:matched(match)
       \ a:match : 0
   endif
 
-  return s:first_number + s:start + s:step()
+  return printf(s:format, s:first_number + s:start + s:step())
 endfunction
 
 function! s:step()
