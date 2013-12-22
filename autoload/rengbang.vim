@@ -86,11 +86,40 @@ function! s:rengbang_use_prev(options, fline, lline)
 endfunction
 
 function! s:rengbang_confirm(fline, lline)
-  let pattern = input('Pattern: ', g:rengbang_default_pattern)
-  let start = input('Start Number: ', g:rengbang_default_start)
-  let step = input('Step Count: ', g:rengbang_default_step)
-  let usefirst = input('Use First: ', g:rengbang_default_usefirst)
-  let format = input('Format: ', g:rengbang_default_format)
+  for option in g:rengbang_default_confirm_sequence
+    if option == 'pattern'
+      let pattern = input('Pattern: ', g:rengbang_default_pattern)
+      if empty(pattern)
+        break
+      endif
+    elseif option == 'start'
+      let start = input('Start Number: ', g:rengbang_default_start)
+      if empty(start)
+        break
+      endif
+    elseif option == 'step'
+      let step = input('Step Count: ', g:rengbang_default_step)
+      if empty(step)
+        break
+      endif
+    elseif option == 'usefirst'
+      let usefirst = input('Use First: ', g:rengbang_default_usefirst)
+      if empty(usefirst)
+        break
+      endif
+    elseif option == 'format'
+      let format = input('Format: ', g:rengbang_default_format)
+      if empty(format)
+        break
+      endif
+    endif
+  endfor
+
+  let pattern  = exists('pattern')  && !empty(pattern)  ? pattern  : g:rengbang_default_pattern
+  let start    = exists('start')    && !empty(start)    ? start    : g:rengbang_default_start
+  let step     = exists('step')     && !empty(step)     ? step     : g:rengbang_default_step
+  let usefirst = exists('usefirst') && !empty(usefirst) ? usefirst : g:rengbang_default_usefirst
+  let format   = exists('format')   && !empty(format)   ? format   : g:rengbang_default_format
 
   call s:rengbang([pattern, start, step, usefirst, format], a:fline, a:lline)
 endfunction

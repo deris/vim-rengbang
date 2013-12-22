@@ -48,7 +48,13 @@ let g:rengbang_default_step     = get(g:, 'rengbang_default_step', 1)
 let g:rengbang_default_pattern  = get(g:, 'rengbang_default_pattern', '\(\d\+\)')
 let g:rengbang_default_usefirst = get(g:, 'rengbang_default_usefirst', 0)
 let g:rengbang_default_format   = get(g:, 'rengbang_default_format', '%d')
-
+let g:rengbang_default_confirm_sequence = [
+  \ 'pattern',
+  \ 'start',
+  \ 'step',
+  \ 'usefirst',
+  \ 'format',
+  \ ]
 
 
 let &cpo = s:save_cpo
