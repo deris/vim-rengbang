@@ -115,6 +115,8 @@ function! s:rengbang_confirm(fline, lline)
     endif
   endfor
 
+  redraw!
+
   let pattern  = exists('pattern')  && !empty(pattern)  ? pattern  : g:rengbang_default_pattern
   let start    = exists('start')    && !empty(start)    ? start    : g:rengbang_default_start
   let step     = exists('step')     && !empty(step)     ? step     : g:rengbang_default_step
