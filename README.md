@@ -22,6 +22,12 @@ Screenshot
 
 ![screenshot4](http://gifzo.net/YNLnolfBJK.gif)
 
+### specify format for sequencial number
+![screenshot5](http://gifzo.net/BO1olOZJ8yQ.gif)
+
+### RengBangConfirm is confirming option at Command-line
+![screenshot6](http://gifzo.net/BWAhiKvtIZU.gif)
+
 
 Usage
 ---
@@ -29,43 +35,48 @@ Usage
 ### Commands
 ```vim
 " Select text linewise and you can use following command
-" for sequential numbering (in Japanese called rengbang).
+" for sequencial numbering (in Japanese called rengbang).
 
-" Sequential numbering use default settings(ref. global variables).
+" Sequencial numbering use default settings(ref. global variables).
 :'<,'>RengBang
 " Specify pattern like this. This sample is for array index.
 :'<,'>RengBang \[\zs\(\d\+\)\ze\]
 " Start sequencial numbering from 3.
-:'<,'>RengBang \[\zs\(\d\+\)\ze\] 3
+:'<,'>RengBang \(\d\+\)  3
 " Start from 3 and 2 step.
-:'<,'>RengBang \[\zs\(\d\+\)\ze\] 0  2
+:'<,'>RengBang \(\d\+\)  0  2
 " Start position use first detected number.
-:'<,'>RengBang \[\zs\(\d\+\)\ze\] 0  1  1
+:'<,'>RengBang \(\d\+\)  0  1  1
+" Use format %03d for replacing to sequencial number like '001.'.
+:'<,'>RengBang \(\d\+\)  0  1  0  %03d.
 
 " You can use previous command options.
 :'<,'>RengBangUsePrev
 " Use previous pattern and set other options.
-:'<,'>RengBangUsePrev 1 1 0
+:'<,'>RengBangUsePrev  0  1  0  %d
 ```
 
 ### Functions
 ```vim
 " You can use function same as commands, all parameter is option.
 " This is function's format.
-"   rengbang#rengbang([pattern, start, step, use_first])
-"   rengbang#rengbang_use_prev([start, step, use_first])
+"   rengbang#rengbang([pattern, start, step, usefirst, format])
+"   rengbang#rengbang_use_prev([start, step, usefirst, format])
+"   rengbang#rengbang_confirm()
 
-" This is like :'<,'>RengBang \[\zs\(\d\+\)\ze\] 0  1  1
-:'<,'>call rengbang#rengbang('\[\zs\(\d\+\)\ze\]', 0, 1, 1)
-" This is like :'<,'>RengBangUsePrev 1 1 0
-:'<,'>call rengbang#rengbang_use_prev(1, 1, 0)
+" This is like :'<,'>RengBang \(\d\+\)  0  1  1  %d
+:'<,'>call rengbang#rengbang('\(\d\+\)', 0, 1, 1, '%d')
+" This is like :'<,'>RengBangUsePrev  1  1  0  %d
+:'<,'>call rengbang#rengbang_use_prev(1, 1, 0, '%d')
+" This is like :'<,'>RengBangConfirm
+:'<,'>call rengbang#rengbang_confirm()
 
 " You can use this function for customizing default settings.
 " This is functions format
-"   rengbang#config([pattern, start, step, use_first])
+"   rengbang#config([pattern, start, step, usefirst, format])
 
-" This is only config settings without sequential numbering.
-:call rengbang#config('\[\zs\(\d\+\)\ze\]', 0, 1, 1)
+" This is only config settings without sequencial numbering.
+:call rengbang#config('\(\d\+\)', 0, 1, 1, '%d')
 ```
 
 ### Global variables
@@ -78,6 +89,13 @@ let g:rengbang_default_pattern  = '\(\d\+\)'
 let g:rengbang_default_start    = 0
 let g:rengbang_default_step     = 1
 let g:rengbang_default_usefirst = 0
+let g:rengbang_default_confirm_sequence = [
+  \ 'pattern',
+  \ 'start',
+  \ 'step',
+  \ 'usefirst',
+  \ 'format',
+  \ ]
 ```
 
 ### Operators
