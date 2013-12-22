@@ -1,4 +1,4 @@
-" rengbang - Vim plugin for sequencial numbering
+" rengbang - Vim plugin for sequencial numbering with pattern
 " Version: 0.0.1
 " Author: manga_osyo, deris0126
 " Copyright (C) 2013 deris0126
