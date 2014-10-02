@@ -68,7 +68,7 @@ COMMANDS                                       *rengbang-commands*
 	[step] is step number for sequencial numbering.
 	[usefirst] is to use first match number for sequencial numbering.
 	[format] is format for replacing sequencial numbering.
-	[format] must be *printf* format like '%d'.
+	[format] must be |printf| format like '%d'.
 
 :[range]RengBangUsePrev [start] [step] [usefirst] [format]	*RengBangUsePrev*
 	This command is same as RengBang, this use
