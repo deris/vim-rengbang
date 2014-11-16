@@ -1,6 +1,6 @@
 " rengbang - operator for vim-rengbang
-" Version: 0.0.1
-" Copyright (C) 2013 deris0126
+" Version: 1.0.0
+" Copyright (C) 2013-2014 deris <deris0126@gmail.com>
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
