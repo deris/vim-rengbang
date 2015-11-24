@@ -8,25 +8,25 @@ Screenshot
 
 ### input 0-99
 
-![screenshot1](http://gifzo.net/BDoBAj8f5Fj.gif)
+![screenshot1](https://raw.githubusercontent.com/deris/s/master/vim-rengbang/vim-rengbang_01_input0-99.gif)
 
 ### insert sequencial number to head of line
 
-![screenshot2](http://gifzo.net/i7xgddDAvJ.gif)
+![screenshot2](https://raw.githubusercontent.com/deris/s/master/vim-rengbang/vim-rengbang_02_sequencial_number.gif)
 
 ### insert sequencial number before 'foo'
 
-![screenshot3](http://gifzo.net/BFp5z1aVuA8.gif)
+![screenshot3](https://raw.githubusercontent.com/deris/s/master/vim-rengbang/vim-rengbang_03_before_foo.gif)
 
 ### revise sequencial number when array index is slanted
 
-![screenshot4](http://gifzo.net/YNLnolfBJK.gif)
+![screenshot4](https://raw.githubusercontent.com/deris/s/master/vim-rengbang/vim-rengbang_04_revice_array_index.gif)
 
 ### specify format for sequencial number
-![screenshot5](http://gifzo.net/BO1olOZJ8yQ.gif)
+![screenshot5](https://raw.githubusercontent.com/deris/s/master/vim-rengbang/vim-rengbang_05_specify_format.gif)
 
 ### RengBangConfirm is confirming option at Command-line
-![screenshot6](http://gifzo.net/BWAhiKvtIZU.gif)
+![screenshot6](https://raw.githubusercontent.com/deris/s/master/vim-rengbang/vim-rengbang_06_rengbangconfirm.gif)
 
 
 Usage
