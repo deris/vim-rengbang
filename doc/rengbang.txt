@@ -84,7 +84,7 @@ FUNCTIONS                                       *rengbang-functions*
 rengbang#rengbang([pattern], [start], [step], [usefirst], [format]) [range]	*rengbang#rengbang()*
 	This is function version of RengBang.
 
-rengbang#rengbang_use_prev([pattern], [start], [step], [usefirst], [format) [range]	*rengbang#rengbang_use_prev()*
+rengbang#rengbang_use_prev([start], [step], [usefirst], [format]) [range]	*rengbang#rengbang_use_prev()*
 	This is function version of RengBangUsePrev.
 
 rengbang#rengbang_confirm() [range]				*rengbang#rengbang_confirm()*
