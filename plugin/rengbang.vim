@@ -1,7 +1,7 @@
 " rengbang - Vim plugin for sequencial numbering with pattern
-" Version: 1.0.0
+" Version: 1.1.0
 " Author: manga_osyo, deris0126
-" Copyright (C) 2013-2014 deris <deris0126@gmail.com>
+" Copyright (C) 2013-2015 deris <deris0126@gmail.com>
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -33,12 +33,12 @@ set cpo&vim
 
 
 
-command! -range -nargs=*
+command! -range -nargs=* -complete=customlist,rengbang#complete_rengbang
   \	RengBang
-  \	<line1>,<line2>call rengbang#rengbang(<f-args>)
-command! -range -nargs=*
+  \	<line1>,<line2>call rengbang#rengbang(<q-args>)
+command! -range -nargs=* -complete=customlist,rengbang#complete_rengbang_use_prev
   \	RengBangUsePrev
-  \	<line1>,<line2>call rengbang#rengbang_use_prev(<f-args>)
+  \	<line1>,<line2>call rengbang#rengbang_use_prev(<q-args>)
 command! -range -nargs=0
   \	RengBangConfirm
   \	<line1>,<line2>call rengbang#rengbang_confirm()
