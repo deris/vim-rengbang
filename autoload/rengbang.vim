@@ -64,51 +64,33 @@ endfunction
 " Private {{{1
 
 " define options
-call s:parser_rengbang.on('--pattern=VALUE', 'specify pattern for replacing to sequencial number',
-  \ {'default' : g:rengbang_default_pattern})
-call s:parser_rengbang.on('--start-number=VALUE', 'start number of sequencial number',
-  \ {'default' : g:rengbang_default_start})
-call s:parser_rengbang.on('--step-count=VALUE', 'step count of sequencial number',
-  \ {'default' : g:rengbang_default_step})
-call s:parser_rengbang.on('--use-first', 'specify if you want to use first matched number as start number',
-  \ {'default' : g:rengbang_default_usefirst})
-call s:parser_rengbang.on('--format=VALUE', 'format of sequencial number. you can use printf style format like %d and %x',
-  \ {'default' : g:rengbang_default_format})
+call s:parser_rengbang.on('--pattern=VALUE', 'specify pattern for replacing to sequencial number')
+call s:parser_rengbang.on('--start-number=VALUE', 'start number of sequencial number')
+call s:parser_rengbang.on('--step-count=VALUE', 'step count of sequencial number')
+call s:parser_rengbang.on('--use-first', 'specify if you want to use first matched number as start number')
+call s:parser_rengbang.on('--format=VALUE', 'format of sequencial number. you can use printf style format like %d and %x')
 
-call s:parser_rengbang_use_prev.on('--start-number=VALUE', 'start number of sequencial number',
-  \ {'default' : g:rengbang_default_start})
-call s:parser_rengbang_use_prev.on('--step-count=VALUE', 'step count of sequencial number',
-  \ {'default' : g:rengbang_default_step})
-call s:parser_rengbang_use_prev.on('--use-first', 'specify if you want to use first matched number as start number',
-  \ {'default' : g:rengbang_default_usefirst})
-call s:parser_rengbang_use_prev.on('--format=VALUE', 'format of sequencial number. you can use printf style format like %d and %x',
-  \ {'default' : g:rengbang_default_format})
+call s:parser_rengbang_use_prev.on('--start-number=VALUE', 'start number of sequencial number')
+call s:parser_rengbang_use_prev.on('--step-count=VALUE', 'step count of sequencial number')
+call s:parser_rengbang_use_prev.on('--use-first', 'specify if you want to use first matched number as start number')
+call s:parser_rengbang_use_prev.on('--format=VALUE', 'format of sequencial number. you can use printf style format like %d and %x')
 
 " functions
 function! s:rengbang(cmd_args, fline, lline)
   let parsed_args = call(s:parser_rengbang.parse, a:cmd_args, s:parser_rengbang)
-  if empty(get(parsed_args, '__unknown_args__', []))
-    " only '--' style options specified or no args specified
-    let a:options = [
-      \ parsed_args['pattern'],
-      \ parsed_args['start-number'],
-      \ parsed_args['step-count'],
-      \ parsed_args['use-first'],
-      \ parsed_args['format'],
-      \ ]
-  else
-    let a:options = parsed_args.__unknown_args__
-  endif
+  let a:options = [
+    \ get(parsed_args, 'pattern',      get(get(parsed_args, '__unknown_args__', []), 0, g:rengbang_default_pattern)),
+    \ get(parsed_args, 'start-number', get(get(parsed_args, '__unknown_args__', []), 1, g:rengbang_default_start)),
+    \ get(parsed_args, 'step-count',   get(get(parsed_args, '__unknown_args__', []), 2, g:rengbang_default_step)),
+    \ get(parsed_args, 'use-first',    get(get(parsed_args, '__unknown_args__', []), 3, g:rengbang_default_usefirst)),
+    \ get(parsed_args, 'format',       get(get(parsed_args, '__unknown_args__', []), 4, g:rengbang_default_format)),
+    \ ]
 
-  if len(a:options) > 5
-    return
-  endif
-
-  let pattern = get(a:options, 0, '') == '' ? g:rengbang_default_pattern : a:options[0]
-  let s:start = get(a:options, 1, g:rengbang_default_start)
-  let s:step  = get(a:options, 2, g:rengbang_default_step)
-  let s:usefirst  = get(a:options, 3, g:rengbang_default_usefirst)
-  let s:format  = get(a:options, 4, g:rengbang_default_format)
+  let pattern = a:options[0]
+  let s:start = a:options[1]
+  let s:step  = a:options[2]
+  let s:usefirst  = a:options[3]
+  let s:format  = a:options[4]
 
   let s:prev_pattern = pattern
   let s:prev_start = s:start
@@ -127,27 +109,18 @@ endfunction
 
 function! s:rengbang_use_prev(cmd_args, fline, lline)
   let parsed_args = call(s:parser_rengbang_use_prev.parse, a:cmd_args, s:parser_rengbang_use_prev)
-  if empty(get(parsed_args, '__unknown_args__', []))
-    " only '--' style options specified or no args specified
-    let a:options = [
-      \ parsed_args['start-number'],
-      \ parsed_args['step-count'],
-      \ parsed_args['use-first'],
-      \ parsed_args['format'],
-      \ ]
-  else
-    let a:options = parsed_args.__unknown_args__
-  endif
-
-  if len(a:options) > 4
-    return
-  endif
+  let a:options = [
+    \ get(parsed_args, 'start-number', get(get(parsed_args, '__unknown_args__', []), 0, get(s:, 'prev_start',    g:rengbang_default_start))),
+    \ get(parsed_args, 'step-count',   get(get(parsed_args, '__unknown_args__', []), 1, get(s:, 'prev_step',     g:rengbang_default_step))),
+    \ get(parsed_args, 'use-first',    get(get(parsed_args, '__unknown_args__', []), 2, get(s:, 'prev_usefirst', g:rengbang_default_usefirst))),
+    \ get(parsed_args, 'format',       get(get(parsed_args, '__unknown_args__', []), 3, get(s:, 'prev_format',   g:rengbang_default_format))),
+    \ ]
 
   let pattern = get(s:, 'prev_pattern', g:rengbang_default_pattern)
-  let start = get(a:options, 0, get(s:, 'prev_start', g:rengbang_default_start))
-  let step  = get(a:options, 1, get(s:, 'prev_step', g:rengbang_default_step))
-  let usefirst = get(a:options, 2, get(s:, 'prev_usefirst', g:rengbang_default_usefirst))
-  let format = get(a:options, 3, get(s:, 'prev_format', g:rengbang_default_format))
+  let start = a:options[0]
+  let step  = a:options[1]
+  let usefirst = a:options[2]
+  let format = a:options[3]
 
   call s:rengbang([join([pattern, start, step, usefirst, format], ' ')], a:fline, a:lline)
 endfunction
