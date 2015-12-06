@@ -61,7 +61,8 @@ INTERFACE					*rengbang-interface*
 ------------------------------------------------------------------------------
 COMMANDS                                       *rengbang-commands*
 
-:[range]RengBang [pattern] [start] [step] [usefirst] [format]	*RengBang*
+						*RengBang*
+:[range]RengBang [pattern] [start] [step] [usefirst] [format] [options]
 	You can use this command for sequencial numbering.
 	[pattern] is regex pattern for insertint sequencial numbering.
 	[start] is start number for sequencial numbering.
@@ -69,12 +70,31 @@ COMMANDS                                       *rengbang-commands*
 	[usefirst] is to use first match number for sequencial numbering.
 	[format] is format for replacing sequencial numbering.
 	[format] must be |printf| format like '%d'.
+	[options] can be specified several options like following.
+		If you specify both argument and option, option will be used.
+		--pattern=VALUE
+			--pattern must be specified with VALUE
+			VALUE is same as [pattern]
+		--start-number=VALUE
+			--start-number must be specified with VALUE
+			VALUE is same as [start]
+		--step-count=VALUE
+			--step-count must be specified with VALUE
+			VALUE is same as [step]
+		--use-first
+			--use-first must be specified with VALUE
+			VALUE is same as [usefirst]
+		--format=VALUE
+			--format must be specified with VALUE
+			VALUE is same as [format]
 
-:[range]RengBangUsePrev [start] [step] [usefirst] [format]	*RengBangUsePrev*
+						*RengBangUsePrev*
+:[range]RengBangUsePrev [start] [step] [usefirst] [format] [options]
 	This command is same as RengBang, this use
 	previous pattern and can set other options.
 
-:[range]RengBangConfirm						*RengBangConfirm*
+						*RengBangConfirm*
+:[range]RengBangConfirm
 	This command is same as RengBang, this confirm
 	options at Command-line.
 
@@ -146,11 +166,20 @@ EXAMPLES					*rengbang-examples*
 :'<,'>RengBang \(\d\+\)  0  1  1
 " Use format %03d for replacing to sequencial number like '001.'.
 :'<,'>RengBang \(\d\+\)  0  1  0  %03d.
+" Use option same as above
+:'<,'>RengBang --pattern=\(\d\+\) --start-number=0 --step-count=1 --format=%03d.
+" You can specify both argument and options
+:'<,'>RengBang \(\d\+\) 0 --format=%03d. --use-first
 
 " You can use previous command options.
 :'<,'>RengBangUsePrev
 " Use previous pattern and set other options.
 :'<,'>RengBangUsePrev  1  1  0  %d
+" Use option same as above
+:'<,'>RengBangUsePrev --start-number=1 --step-count=1 --format=%d
+" You can specify both argument and options
+:'<,'>RengBangUsePrev 0 --format=%03d. --use-first
+
 " You can use function same as commands, all parameter is option.
 " This is function's format.
 "   rengbang#rengbang([pattern, start, step, usefirst, format])
@@ -206,6 +235,9 @@ BUGS						*rengbang-bugs*
 
 ==============================================================================
 CHANGELOG					*rengbang-changelog*
+
+1.1.0	2014-12-6
+- add option to command
 
 1.0.0	2014-11-17
 - for vim.org release version
