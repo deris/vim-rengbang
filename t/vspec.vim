@@ -68,6 +68,15 @@ describe 'RengBang command'
     Expect getline(5) == '60. line'
   end
 
+  it 'can be sequencial numbering with using format'
+    %RengBang \(\d*\)\. 16 16 0 %02X
+    Expect getline(1) == '10. line'
+    Expect getline(2) == '20. line'
+    Expect getline(3) == '30. line'
+    Expect getline(4) == '40. line'
+    Expect getline(5) == '50. line'
+  end
+
   it 'can be sequencial numbering with range'
     2,4RengBang
     Expect getline(1) == '10. line'
@@ -75,6 +84,69 @@ describe 'RengBang command'
     Expect getline(3) == '1. line'
     Expect getline(4) == '2. line'
     Expect getline(5) == '10. line'
+  end
+
+  it 'can be sequencial numbering with pattern(named option)'
+    %RengBang --pattern=\(\d\)\.
+    Expect getline(1) == '10. line'
+    Expect getline(2) == '11. line'
+    Expect getline(3) == '12. line'
+    Expect getline(4) == '13. line'
+    Expect getline(5) == '14. line'
+  end
+
+  it 'can be sequencial numbering with start number(named option)'
+    %RengBang --start-number=10
+    Expect getline(1) == '10. line'
+    Expect getline(2) == '11. line'
+    Expect getline(3) == '12. line'
+    Expect getline(4) == '13. line'
+    Expect getline(5) == '14. line'
+  end
+
+  it 'can be sequencial numbering with step number(named option)'
+    %RengBang --step-count=10
+    Expect getline(1) == '0. line'
+    Expect getline(2) == '10. line'
+    Expect getline(3) == '20. line'
+    Expect getline(4) == '30. line'
+    Expect getline(5) == '40. line'
+  end
+
+  it 'can be sequencial numbering with using first match number(named option)'
+    %RengBang --use-first=1
+    Expect getline(1) == '10. line'
+    Expect getline(2) == '11. line'
+    Expect getline(3) == '12. line'
+    Expect getline(4) == '13. line'
+    Expect getline(5) == '14. line'
+  end
+
+  it 'can be sequencial numbering with using format(named option)'
+    %RengBang --start-number=10 --format=%02X
+    Expect getline(1) == '0A. line'
+    Expect getline(2) == '0B. line'
+    Expect getline(3) == '0C. line'
+    Expect getline(4) == '0D. line'
+    Expect getline(5) == '0E. line'
+  end
+
+  it 'can be sequencial numbering with using unnamed and named option together'
+    %RengBang \(\d\)\. 10 2 --format=%02X
+    Expect getline(1) == '10A. line'
+    Expect getline(2) == '10C. line'
+    Expect getline(3) == '10E. line'
+    Expect getline(4) == '110. line'
+    Expect getline(5) == '112. line'
+  end
+
+  it 'can be sequencial numbering with using same unnamed and named option'
+    %RengBang \(\d\+\)\. 0 1 --pattern=\(\d\)\. --start-number=10 --step-count=2 
+    Expect getline(1) == '110. line'
+    Expect getline(2) == '112. line'
+    Expect getline(3) == '114. line'
+    Expect getline(4) == '116. line'
+    Expect getline(5) == '118. line'
   end
 
 end
@@ -135,6 +207,15 @@ describe 'RengBangUsePrev command'
     Expect getline(5) == '150. line'
   end
 
+  it 'can be sequencial numbering with using previous settings(set start and step and usefirst and format)'
+    %RengBangUsePrev 10 1 0 %02X
+    Expect getline(1) == '10A. line'
+    Expect getline(2) == '10B. line'
+    Expect getline(3) == '10C. line'
+    Expect getline(4) == '10D. line'
+    Expect getline(5) == '10E. line'
+  end
+
   it 'can be sequencial numbering with using previous settings and range'
     2,4RengBangUsePrev
     Expect getline(1) == '10. line'
@@ -142,6 +223,42 @@ describe 'RengBangUsePrev command'
     Expect getline(3) == '11. line'
     Expect getline(4) == '12. line'
     Expect getline(5) == '10. line'
+  end
+
+  it 'can be sequencial numbering with using previous settings(only set start)'
+    %RengBangUsePrev --start-number=10
+    Expect getline(1) == '110. line'
+    Expect getline(2) == '111. line'
+    Expect getline(3) == '112. line'
+    Expect getline(4) == '113. line'
+    Expect getline(5) == '114. line'
+  end
+
+  it 'can be sequencial numbering with using previous settings(only set step)'
+    %RengBangUsePrev --step-count=10
+    Expect getline(1) == '10. line'
+    Expect getline(2) == '110. line'
+    Expect getline(3) == '120. line'
+    Expect getline(4) == '130. line'
+    Expect getline(5) == '140. line'
+  end
+
+  it 'can be sequencial numbering with using previous settings(only set usefirst)'
+    %RengBangUsePrev --use-first=1
+    Expect getline(1) == '10. line'
+    Expect getline(2) == '11. line'
+    Expect getline(3) == '12. line'
+    Expect getline(4) == '13. line'
+    Expect getline(5) == '14. line'
+  end
+
+  it 'can be sequencial numbering with using previous settings(set start and format)'
+    %RengBangUsePrev --start-number=10 --format=%02X
+    Expect getline(1) == '10A. line'
+    Expect getline(2) == '10B. line'
+    Expect getline(3) == '10C. line'
+    Expect getline(4) == '10D. line'
+    Expect getline(5) == '10E. line'
   end
 
 end
@@ -215,6 +332,16 @@ describe 'rengbang#rengbang()'
     Expect getline(3) == '1. line'
     Expect getline(4) == '2. line'
     Expect getline(5) == '10. line'
+  end
+
+  it 'can be sequencial numbering with pattern(include space)'
+    SKIP 'can''t include space now'
+    %call rengbang#rengbang('\(\d\)\. ', 10)
+    Expect getline(1) == '110. line'
+    Expect getline(2) == '111. line'
+    Expect getline(3) == '112. line'
+    Expect getline(4) == '113. line'
+    Expect getline(5) == '114. line'
   end
 
 end
