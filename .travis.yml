@@ -1,10 +1,7 @@
-language: ruby
-rvm:
-  - 2.0.0
+language: generic
+install:
+  - git clone https://github.com/thinca/vim-themis --branch v1.5 --single-branch --depth 1
+  - git clone https://github.com/kana/vim-operator-user
 script:
   - vim --version
-  - cd t/
-  - ../vim-vspec/bin/vspec ../vim-vspec ../vim-operator-user vspec.vim
-install:
-  - git clone https://github.com/kana/vim-vspec.git
-  - git clone https://github.com/kana/vim-operator-user.git
+  - vim-themis/bin/themis --reporter spec --runtimepath vim-operator-user
