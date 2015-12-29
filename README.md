@@ -28,6 +28,12 @@ Screenshot
 ### RengBangConfirm is confirming option at Command-line
 ![screenshot6](https://raw.githubusercontent.com/deris/s/master/vim-rengbang/vim-rengbang_06_rengbangconfirm.gif)
 
+### use option style
+![screenshot7](https://raw.githubusercontent.com/deris/s/master/vim-rengbang/vim-rengbang_07_use_option.gif)
+
+### use both argument and option
+![screenshot8](https://raw.githubusercontent.com/deris/s/master/vim-rengbang/vim-rengbang_08_use_arg_and_option.gif)
+
 
 Usage
 ---
@@ -49,6 +55,10 @@ Usage
 :'<,'>RengBang \(\d\+\)  0  1  1
 " Use format %03d for replacing to sequencial number like '001.'.
 :'<,'>RengBang \(\d\+\)  0  1  0  %03d.
+" Use option same as above
+:'<,'>RengBang --pattern=\(\d\+\) --start-number=0 --step-count=1 --format=%03d.
+" You can specify both argument and options
+:'<,'>RengBang \(\d\+\) 0 --format=%03d. --use-first
 
 " You can use previous command options.
 :'<,'>RengBangUsePrev
