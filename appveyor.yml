@@ -1,0 +1,22 @@
+version: '{build}'
+clone_depth: 1
+environment:
+  matrix:
+  - VIM_URL: http://files.kaoriya.net/vim/vim74-kaoriya-win64.zip
+  - VIM_URL: http://files.kaoriya.net/vim/2011/vim73-kaoriya-win64-20110306.zip
+install:
+- ps: |
+    $zip = $Env:APPVEYOR_BUILD_FOLDER + '\vim.zip'
+    $vim = $Env:APPVEYOR_BUILD_FOLDER + '\vim\'
+    (New-Object Net.WebClient).DownloadFile($Env:VIM_URL, $zip)
+    [Reflection.Assembly]::LoadWithPartialName('System.IO.Compression.FileSystem') > $null
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($zip, $vim)
+    $Env:THEMIS_VIM = $vim + (Get-ChildItem $vim).Name + '\vim.exe'
+- cmd: git -c advice.detachedHead=false clone https://github.com/thinca/vim-themis --branch v1.5 --single-branch --depth 1
+- cmd: git -c advice.detachedHead=false clone https://github.com/kana/vim-operator-user
+build: off
+test_script:
+- ps: |
+    & $Env:THEMIS_VIM --version
+- cmd: vim-themis\bin\themis.bat --reporter spec --runtimepath vim-operator-user
+deploy: off
