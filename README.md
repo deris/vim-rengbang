@@ -1,5 +1,6 @@
 vim-rengbang
 ===
+[![Build Status](https://travis-ci.org/deris/vim-rengbang.svg?branch=master)](https://travis-ci.org/deris/vim-rengbang)
 
 This is Vim plugin for sequencial numbering with pattern.
 
