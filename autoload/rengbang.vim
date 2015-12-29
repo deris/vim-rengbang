@@ -37,11 +37,11 @@ let s:parser_rengbang_use_prev.disable_auto_help = 1
 
 " Public API {{{1
 function! rengbang#rengbang(...) range
-  call s:rengbang(a:000, a:firstline, a:lastline)
+  call s:rengbang([join(map(copy(a:000), 'escape(v:val, " ")'), ' ')], a:firstline, a:lastline)
 endfunction
 
 function! rengbang#rengbang_use_prev(...) range
-  call s:rengbang_use_prev(a:000, a:firstline, a:lastline)
+  call s:rengbang_use_prev([join(map(copy(a:000), 'escape(v:val, " ")'), ' ')], a:firstline, a:lastline)
 endfunction
 
 function! rengbang#rengbang_confirm() range
@@ -58,6 +58,14 @@ endfunction
 
 function! rengbang#complete_rengbang_use_prev(arglead, cmdline, cursorpos)
   return s:parser_rengbang_use_prev.complete(a:arglead, a:cmdline, a:cursorpos)
+endfunction
+
+function! rengbang#rengbang_for_command(...) range
+  call s:rengbang(a:000, a:firstline, a:lastline)
+endfunction
+
+function! rengbang#rengbang_use_prev_for_command(...) range
+  call s:rengbang_use_prev(a:000, a:firstline, a:lastline)
 endfunction
 "}}}
 

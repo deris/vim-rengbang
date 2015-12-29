@@ -35,10 +35,10 @@ set cpo&vim
 
 command! -range -nargs=* -complete=customlist,rengbang#complete_rengbang
   \	RengBang
-  \	<line1>,<line2>call rengbang#rengbang(<q-args>)
+  \	<line1>,<line2>call rengbang#rengbang_for_command(<q-args>)
 command! -range -nargs=* -complete=customlist,rengbang#complete_rengbang_use_prev
   \	RengBangUsePrev
-  \	<line1>,<line2>call rengbang#rengbang_use_prev(<q-args>)
+  \	<line1>,<line2>call rengbang#rengbang_use_prev_for_command(<q-args>)
 command! -range -nargs=0
   \	RengBangConfirm
   \	<line1>,<line2>call rengbang#rengbang_confirm()
