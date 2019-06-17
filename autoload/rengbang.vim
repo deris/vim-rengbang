@@ -86,7 +86,7 @@ call s:parser_rengbang_use_prev.on('--format=VALUE', 'format of sequencial numbe
 " functions
 function! s:rengbang(cmd_args, fline, lline)
   let parsed_args = call(s:parser_rengbang.parse, a:cmd_args, s:parser_rengbang)
-  let a:options = [
+  let options = [
     \ get(parsed_args, 'pattern',      get(get(parsed_args, '__unknown_args__', []), 0, g:rengbang_default_pattern)),
     \ get(parsed_args, 'start-number', get(get(parsed_args, '__unknown_args__', []), 1, g:rengbang_default_start)),
     \ get(parsed_args, 'step-count',   get(get(parsed_args, '__unknown_args__', []), 2, g:rengbang_default_step)),
@@ -94,11 +94,11 @@ function! s:rengbang(cmd_args, fline, lline)
     \ get(parsed_args, 'format',       get(get(parsed_args, '__unknown_args__', []), 4, g:rengbang_default_format)),
     \ ]
 
-  let pattern = a:options[0]
-  let s:start = a:options[1]
-  let s:step  = a:options[2]
-  let s:usefirst  = a:options[3]
-  let s:format  = a:options[4]
+  let pattern = options[0]
+  let s:start = options[1]
+  let s:step  = options[2]
+  let s:usefirst  = options[3]
+  let s:format  = options[4]
 
   let s:prev_pattern = pattern
   let s:prev_start = s:start
@@ -117,7 +117,7 @@ endfunction
 
 function! s:rengbang_use_prev(cmd_args, fline, lline)
   let parsed_args = call(s:parser_rengbang_use_prev.parse, a:cmd_args, s:parser_rengbang_use_prev)
-  let a:options = [
+  let options = [
     \ get(parsed_args, 'start-number', get(get(parsed_args, '__unknown_args__', []), 0, get(s:, 'prev_start',    g:rengbang_default_start))),
     \ get(parsed_args, 'step-count',   get(get(parsed_args, '__unknown_args__', []), 1, get(s:, 'prev_step',     g:rengbang_default_step))),
     \ get(parsed_args, 'use-first',    get(get(parsed_args, '__unknown_args__', []), 2, get(s:, 'prev_usefirst', g:rengbang_default_usefirst))),
@@ -125,10 +125,10 @@ function! s:rengbang_use_prev(cmd_args, fline, lline)
     \ ]
 
   let pattern = get(s:, 'prev_pattern', g:rengbang_default_pattern)
-  let start = a:options[0]
-  let step  = a:options[1]
-  let usefirst = a:options[2]
-  let format = a:options[3]
+  let start = options[0]
+  let step  = options[1]
+  let usefirst = options[2]
+  let format = options[3]
 
   call s:rengbang([join([pattern, start, step, usefirst, format], ' ')], a:fline, a:lline)
 endfunction
